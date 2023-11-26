@@ -10,6 +10,12 @@
 	"inputs": [
 		{
 			"id": "CardboardInput"
+		},
+		{
+			"id": "ARCore-Input"
+		},
+		{
+			"id": "ARKit-Input"
 		}
 	]
 }

@@ -25,12 +25,23 @@ namespace Google.XR.Cardboard
     using UnityEngine.Rendering;
     using UnityEngine.XR;
     using UnityEngine.XR.Management;
+#if UNITY_ANDROID
+    using UnityEngine.XR.ARCore;
+#elif UNITY_IOS
+    using UnityEngine.XR.ARKit;
+#endif
 
     /// <summary>
     /// XR Loader for Cardboard XR Plugin.
     /// Loads Display and Input Subsystems.
     /// </summary>
+#if UNITY_ANDROID
+    public class XRLoader : ARCoreLoader
+#elif UNITY_IOS
+    public class XRLoader : ARKitLoader
+#else
     public class XRLoader : XRLoaderHelper
+#endif
     {
         private static List<XRDisplaySubsystemDescriptor> _displaySubsystemDescriptors =
             new List<XRDisplaySubsystemDescriptor>();
@@ -94,11 +105,13 @@ namespace Google.XR.Cardboard
         /// <returns>Whether or not initialization succeeded.</returns>
         public override bool Initialize()
         {
+            base.Initialize();
+
             CardboardSDKInitialize();
             CreateSubsystem<XRDisplaySubsystemDescriptor, XRDisplaySubsystem>(
                 _displaySubsystemDescriptors, "CardboardDisplay");
-            CreateSubsystem<XRInputSubsystemDescriptor, XRInputSubsystem>(
-                _inputSubsystemDescriptors, "CardboardInput");
+            //CreateSubsystem<XRInputSubsystemDescriptor, XRInputSubsystem>(
+            //    _inputSubsystemDescriptors, "CardboardInput");
             _isInitialized = true;
             return true;
         }
@@ -110,8 +123,10 @@ namespace Google.XR.Cardboard
         /// <returns>Whether or not all subsystems were successfully started.</returns>
         public override bool Start()
         {
+            base.Start();
+
             StartSubsystem<XRDisplaySubsystem>();
-            StartSubsystem<XRInputSubsystem>();
+            //StartSubsystem<XRInputSubsystem>();
             _isStarted = true;
             return true;
         }
@@ -124,9 +139,9 @@ namespace Google.XR.Cardboard
         public override bool Stop()
         {
             StopSubsystem<XRDisplaySubsystem>();
-            StopSubsystem<XRInputSubsystem>();
+            //StopSubsystem<XRInputSubsystem>();
             _isStarted = false;
-            return true;
+            return base.Stop();
         }
 
         /// <summary>
@@ -137,10 +152,10 @@ namespace Google.XR.Cardboard
         public override bool Deinitialize()
         {
             DestroySubsystem<XRDisplaySubsystem>();
-            DestroySubsystem<XRInputSubsystem>();
+            //DestroySubsystem<XRInputSubsystem>();
             CardboardSDKDeinitialize();
             _isInitialized = false;
-            return true;
+            return base.Deinitialize();
         }
 
         /// <summary>

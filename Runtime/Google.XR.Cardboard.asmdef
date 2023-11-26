@@ -1,14 +1,18 @@
 {
     "name": "Google.XR.Cardboard",
+    "rootNamespace": "",
     "references": [
-        "Unity.XR.Management"
+        "Unity.XR.Management",
+        "Unity.XR.ARCore",
+        "Unity.XR.ARKit"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
