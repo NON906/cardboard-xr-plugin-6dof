@@ -105,7 +105,10 @@ namespace Google.XR.Cardboard
         /// <returns>Whether or not initialization succeeded.</returns>
         public override bool Initialize()
         {
-            base.Initialize();
+            if (!base.Initialize())
+            {
+                return false;
+            }
 
             CardboardSDKInitialize();
             CreateSubsystem<XRDisplaySubsystemDescriptor, XRDisplaySubsystem>(
@@ -123,7 +126,10 @@ namespace Google.XR.Cardboard
         /// <returns>Whether or not all subsystems were successfully started.</returns>
         public override bool Start()
         {
-            base.Start();
+            if (!base.Start())
+            {
+                return false;
+            }
 
             StartSubsystem<XRDisplaySubsystem>();
             //StartSubsystem<XRInputSubsystem>();
