@@ -4,11 +4,13 @@
     "references": [
         "Unity.XR.Management",
         "Unity.XR.ARCore",
-        "Unity.XR.ARKit"
+        "Unity.XR.ARKit",
+        "Unity.XR.ARFoundation",
+        "Unity.XR.ARSubsystems"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": false,
+    "allowUnsafeCode": true,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
